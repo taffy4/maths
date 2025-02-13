@@ -1,0 +1,195 @@
+<html>
+<head>
+    <title>Trigonometric Functions Graphs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Trigonometric Functions Graphs</h1>
+        <div class="grid grid-cols-1 gap-8">
+            <div class="bg-white p-8 rounded shadow">
+                <h2 class="text-xl font-semibold mb-4">Graphs of sin(x), 2sin(x), sin(2x)</h2>
+                <canvas id="sinGraph" class="w-full h-96"></canvas>
+            </div>
+            <div class="bg-white p-8 rounded shadow">
+                <h2 class="text-xl font-semibold mb-4">Graphs of cos(x), 3cos(x), cos(3x)</h2>
+                <canvas id="cosGraph" class="w-full h-96"></canvas>
+            </div>
+            <div class="bg-white p-8 rounded shadow">
+                <h2 class="text-xl font-semibold mb-4">Graphs of tan(x), 2tan(x), tan(2x)</h2>
+                <canvas id="tanGraph" class="w-full h-96"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const labels = Array.from({length: 361}, (_, i) => i);
+
+        const sinData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'sin(x)',
+                    data: labels.map(x => Math.sin(x * Math.PI / 180)),
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: '2sin(x)',
+                    data: labels.map(x => 2 * Math.sin(x * Math.PI / 180)),
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: 'sin(2x)',
+                    data: labels.map(x => Math.sin(2 * x * Math.PI / 180)),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }
+            ]
+        };
+
+        const cosData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'cos(x)',
+                    data: labels.map(x => Math.cos(x * Math.PI / 180)),
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: '3cos(x)',
+                    data: labels.map(x => 3 * Math.cos(x * Math.PI / 180)),
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: 'cos(3x)',
+                    data: labels.map(x => Math.cos(3 * x * Math.PI / 180)),
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }
+            ]
+        };
+
+        const tanData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'tan(x)',
+                    data: labels.map(x => Math.tan(x * Math.PI / 180)),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: '2tan(x)',
+                    data: labels.map(x => 2 * Math.tan(x * Math.PI / 180)),
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: 'tan(2x)',
+                    data: labels.map(x => Math.tan(2 * x * Math.PI / 180)),
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }
+            ]
+        };
+
+        const sinConfig = {
+            type: 'line',
+            data: sinData,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Degrees'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        },
+                        min: -2,
+                        max: 2
+                    }
+                }
+            }
+        };
+
+        const cosConfig = {
+            type: 'line',
+            data: cosData,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Degrees'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        },
+                        min: -3,
+                        max: 3
+                    }
+                }
+            }
+        };
+
+        const tanConfig = {
+            type: 'line',
+            data: tanData,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Degrees'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        },
+                        min: -10,
+                        max: 10
+                    }
+                }
+            }
+        };
+
+        window.onload = function() {
+            const sinCtx = document.getElementById('sinGraph').getContext('2d');
+            new Chart(sinCtx, sinConfig);
+
+            const cosCtx = document.getElementById('cosGraph').getContext('2d');
+            new Chart(cosCtx, cosConfig);
+
+            const tanCtx = document.getElementById('tanGraph').getContext('2d');
+            new Chart(tanCtx, tanConfig);
+        };
+    </script>
+</body>
+</html>
